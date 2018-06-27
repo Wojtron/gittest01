@@ -1,0 +1,222 @@
+https://git-scm.com/book/pl/v1/Podstawy-Gita-Rejestrowanie-zmian-w-repozytorium
+
+Inne przydatne komendy
+
+echo " " - wysyla wiadomosc o tresci z cudzys³owia
+clear - czyœci terminal
+mkdir - utworzenie folderu
+ls - zawartoœæ folderu
+cd - przejœcie do folderu
+pwd - pokazuje ca³¹ œcie¿kê, na której siê znajdujemy.
+
+nano - dzia³a (edytor tekstu)
+cat - dzia³a (odczytywanie tekstu bezpoœrednio w terminalu)
+
+xxx
+Linux (ale dzia³a te¿ dla terminalu)
+echo " a a a " >> abc.txt
+
+stworzy plik txt o nazwie abc z zawartoœci¹ " a a a "
+xxxx
+___________________________________________________________________
+___________________________________________________________________
+___________________________________________________________________
+___________________________________________________________________
+SPRAWDZENIE POCZ¥TKOWE
+___________________________________________________________________
+po zainstalowaniu basha warto sprawdzic czy wszystko jest ok. Najlepiej napisz w terminalu 
+
+git version
+
+
+___________________________________________________________________
+NOWY U¯YTKOWNIK
+___________________________________________________________________
+Kiedy wszystko jest w porz¹dku, tworzymy nowego usera.
+
+git config --global user.name "TWOJNAZWA"
+git config --global user.email "TWÓJ@MAIL.PL"
+
+
+A nastepnie warto zerknac czy wszystko siê zapisa³o
+
+git config --global --list 
+
+po wpisaniu powy¿szego uka¿e siê ka¿dy u¿ytkownik ze swoimi danymi 
+(albo jeden, który w³aœnie korzysta).
+
+
+______________________________________________________________________
+KLONOWANIE REPO
+______________________________________________________________________
+Wybierz na githubie repo do sklonowania, nastêpnie po prawej bêdzie zielony 
+przycisk podpisany "CLONE OR DOWNLOAD". Skopiuj z niego link HTTPS. Po
+skopiowaniu przepisz do terminalu (link bez cudzys³owia etc) :
+
+git clone HTTPS://LINKDOTEGOREPO.COM
+
+w tym momencie w twojej lokalizacji utworzy siê folder o nazwie.
+Przy okazji tworzy siê tutaj po³¹czenie z gitem, które sprawdza czy 
+pliki te s¹ zgodne ze stanem z serwera. Aby zobaczyæ status naszego repo
+trzeba wpisaæ
+
+git status
+
+
+
+______________________________________________________________________
+DODAWANIE PLIKÓW DO REPO
+______________________________________________________________________
+Na pocz¹tek pliki trzeba dodaæ do repozytorium (mniej wiêcej jak w SVN tortoise)
+dopiero wtedy jest dla nich robione miejsce w repozytorium. W tym celu wpisujemy:
+
+git add NAZWAPLIKU
+
+(nazwê pliku wpisujemy z rozsezrzeniem, ponadto mo¿na zauwa¿yæ ró¿nicê za pomoc¹
+git status). Mamy ju¿ miejsce na plik, wiêc teraz trzeba wys³aæ sam plik (lub pliki
+je¿eli dodaliœmy ich kilka). W tym celu jest jedna prosta komenda:
+
+git commit
+
+(mo¿na to te¿ podrasowaæ miêdzy innymi jako git commit -m "jakistekst" , gdzie w 
+cudzys³owiach znajduje siê wiadomoœæ towarzysz¹ca commitowaniu).
+
+
+
+______________________________________________________________________
+PUBLIKOWANIE PLIKÓW DO GITHUBA
+______________________________________________________________________
+Po komendach z powyzszego punktu wci¹¿ nie widaæ z pozycji repozytorium plików,
+które do niego wys³aliœmy. Aby pliki by³ wiodczne i znalaz³y siê ,,pe³noprawnie"
+na serwerze, musimy u¿yæ komendy:
+
+git push origin master
+
+gdzie push - wysy³a do repozytorium nowe pliki
+origin - zdalna nazwa sklonowanego repozytorium (przy klonowaniu domyœlnie instancja dostaje tak¹ nazwê)
+master - zdefiniowana nazwa osoby, która wysy³a pliki do repozytorium.
+(nastêpnie pojawi siê pytanie o login i has³o)
+
+______________________________________________________________________
+TWORZENIE GA£ÊZI
+______________________________________________________________________
+Ga³êzie op³aca siê robiæ, gdy¿ dziêki nim mo¿emy dzia³aæ na wskazanym zakresie, co za tym idzie
+zwiêkszone jest bezpieczeñstwo ca³oœci projektu (w razie niepowodzenia uderzy to w jakiœ fragment aplikacji),
+ponadto opcja ta znajduje spore zastosowanie przy podziale projektu miêdzy kilku cz³onków,
+gdzie nie chcemy aby ka¿dy mia³ wp³yw na ca³oœæ projektu. 
+Aktualn¹ ga³¹Ÿ sprawdzamy za pomoc¹ komendy:
+
+git branch
+(git branch z dopiskiem -v pozwala zobaczyæ ostatni¹ zatwierdzon¹ zmianê w ka¿dej ga³êzi)
+
+
+now¹ ga³¹Ÿ mo¿emy utworzyæ za pomoc¹ komendy:
+
+git checkout -b NAZWAGALEZI
+
+
+do zmiany ga³êzi, w której obecnie siê znajdujemy wpisujemy:
+
+git checkout NAZWA(np master)
+
+
+usuwanie ga³êzi nastêpuje po wpisaniu komendy:
+
+git branch -d NAZWAGALEZI
+
+
+Uwaga!
+Ga³¹Ÿ nie jest dostêpna dla innych dopóki nie zostanie wys³ana do zdalnego repozytorium
+za pomoc¹ komendy:
+
+git push origin NAZWAGALEZI
+
+
+______________________________________________________________________
+AKTUALIZOWANIE REPOZYTORIUM
+______________________________________________________________________
+Aktualizacja odbywa siê za pomoc¹:
+
+git pull
+
+
+______________________________________________________________________
+SCALANIE GA£ÊZI
+______________________________________________________________________
+(* Pobieranie  -  Fetch     Scalanie - merge)
+Scalanie do ga³êzi aktywnej (czyli je¿eli jesteœmy masterem, to do ga³êzi master):
+
+git merge NAZWAGALEZI
+
+
+Je¿eli scalanie nie bêdzie mo¿liwe (spowoduje konflikty) scalanie musi odbyæ siê
+rêcznie, a po zmianie trzeba bêdzie je oznaczyæ jako scalone za pomoc¹:
+
+git add NAZWAPLIKU
+
+przed scaleniem zmian mo¿na je obejrzeæ za pomoc¹:
+
+git diff RÓD£OWAGA£¥ DOCELOWAGA£¥
+
+
+______________________________________________________________________
+TAGOWANIE
+______________________________________________________________________
+Tagi s¹ zalecane, np. do identyfikacji wersji oprogramowania. Tworzymy je za pomoc¹:
+
+git tag WERSJA NUMERCOMMITA
+np.
+git tag 1.0.0 1b2e1d63ff
+
+
+Numer commita - ten dziwny ci¹g na koñcu - to 10 znaków w³aœnie numeru commita, do 
+którego ma odwo³ywaæ siê ten tag. Numer uzyskaæ mo¿na z LOG'a
+
+______________________________________________________________________
+LOGI
+______________________________________________________________________
+Historia repozytorium mo¿e byæ przegl¹dana za pomoc¹ komendy
+
+git log
+
+
+jest to jednak najprostsza forma, aby pokazaæ wiêcej szczegó³ów, korzystamy z np.:
+
+git log --author=bob       -> komenda wyœwietlaj¹ca commity konkretnego autora
+git log --pretty=onelina   -> komenda wyœwietlaj¹ca commity bêd¹ce pojedyncz¹ lini¹ 
+git log --name-status      -> komenda wyœwietlaj¹ca zmienione pliki
+git log --graph --oneline --decorate --all  -> ASCII art opatrzone nazwami tagów :)
+
+W przypadku potrzeby pomocy.
+git log --help   
+
+
+______________________________________________________________________
+WYCOFYWANIE ZMIAN LOKALNYCH
+______________________________________________________________________
+Zmiany mo¿na wycofaæ za pomoc¹ (pod warunkiem, ¿e nie zosta³y scommitowane)
+
+git checkout -- NAZWAPLIKU
+
+
+W przypadku porzucenia wszystkich zmian lokalnych, mo¿na pobraæ ostatni¹
+historiê z serwera i ustawiæ j¹ jako ga³¹Ÿ lokaln¹
+
+git fetch origin
+git reset --hard origin/master
+
+
+______________________________________________________________________
+WSKAZÓWKI
+______________________________________________________________________
+wbudowane GUI dla git
+gitk
+
+wyjœcie git z kolorami
+git config color.ui true
+
+poka¿ log jako pojedyncze linie
+git config format.pretty oneline
+
+u¿yj interaktywnego dodawania
+git add -i
